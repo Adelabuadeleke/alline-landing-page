@@ -1,0 +1,76 @@
+/* ─────────────────────────────────────────────────────────
+   GLOBAL STYLES — Alline
+   Design tokens, reset, typography base
+───────────────────────────────────────────────────────── */
+
+:root {
+  /* Colors */
+  --color-black:      #1a1a18;
+  --color-white:      #ffffff;
+  --color-gray-50:    #f7f7f5;
+  --color-gray-100:   #f0f0ed;
+  --color-gray-200:   #e2e2de;
+  --color-gray-300:   #c8c8c3;
+  --color-gray-400:   #a8a8a3;
+  --color-gray-500:   #888883;
+  --color-gray-600:   #686863;
+  --color-amber:      #E8A020;
+  --color-amber-dark: #cc8a18;
+  --color-amber-light:#fdf0d8;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Spacing */
+  --nav-height: 72px;
+  --container-px: clamp(16px, 4vw, 64px);
+  --max-width: 1440px;
+
+  /* Easing */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  background: var(--color-white);
+  color: var(--color-black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Focus visible for keyboard nav */
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Visually hidden utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

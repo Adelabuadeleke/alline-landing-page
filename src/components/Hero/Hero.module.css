@@ -1,0 +1,294 @@
+/* ─────────────────────────────────────────────────────────
+   Hero.module.css
+   Breakpoints: 320 | 375 | 435 | 768 | 1024 | 1200 | 1440
+───────────────────────────────────────────────────────── */
+
+/* ── Section wrapper ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh; /* Safari safe-area aware */
+  padding-top: var(--nav-height);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* clips grid parallax overshoot */
+  background: var(--color-white);
+}
+
+/* ── Grid wrapper — must cover entire section ── */
+/*
+ * The grid uses position:absolute inset:0 inside HeroGrid,
+ * but we still wrap it in a z-indexed layer here so it sits
+ * cleanly behind the visual + content layers.
+ */
+.gridWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* opacity driven by GSAP (starts at 0, fades in) */
+}
+
+/* ── Visual area ── */
+.visualArea {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 44px;
+  padding: 0 var(--container-px);
+}
+
+/* ── Content block ── */
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 860px;
+  padding: 0 var(--container-px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Headline ── */
+.headline {
+  font-size: clamp(36px, 5.5vw, 72px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  color: var(--color-black);
+  margin-bottom: 20px;
+  /* opacity + y driven by GSAP */
+}
+
+.headlineAccent {
+  /* Subtle differentiation — same weight, slight warmth */
+  color: var(--color-black);
+  position: relative;
+}
+
+/* ── Description ── */
+.description {
+  font-size: clamp(15px, 1.4vw, 17px);
+  font-weight: 400;
+  color: var(--color-gray-600);
+  max-width: 580px;
+  line-height: 1.65;
+  margin-bottom: 40px;
+  /* opacity + y driven by GSAP */
+}
+
+/* ── Waitlist form ── */
+.form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 520px;
+  justify-content: center;
+  /* opacity + y driven by GSAP */
+}
+
+.emailInput {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--color-black);
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: 8px;
+  padding: 13px 18px;
+  width: 280px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  -webkit-appearance: none;
+}
+
+.emailInput::placeholder {
+  color: var(--color-gray-400);
+}
+
+.emailInput:focus {
+  border-color: var(--color-gray-500);
+  box-shadow: 0 0 0 3px rgba(232, 160, 32, 0.12);
+}
+
+.submitBtn {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-white);
+  background: var(--color-amber);
+  border: none;
+  border-radius: 8px;
+  padding: 13px 24px;
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  transition: background 0.2s ease, transform 0.15s ease;
+  -webkit-appearance: none;
+}
+
+.submitBtn:hover {
+  background: var(--color-amber-dark);
+  transform: translateY(-1px);
+}
+
+.submitBtn:active {
+  transform: translateY(0);
+}
+
+/* ── Success message ── */
+.successMsg {
+  font-size: 15px;
+  font-weight: 500;
+  color: #2a9d5c;
+  padding: 13px 20px;
+  border: 1px solid #b8e8ce;
+  border-radius: 8px;
+  background: #f0fbf5;
+  letter-spacing: 0.01em;
+}
+
+/* ─────────────────────────────────────────────────────────
+   RESPONSIVE BREAKPOINTS
+───────────────────────────────────────────────────────── */
+
+/* 1440px — max content width */
+@media (min-width: 1440px) {
+  .visualArea {
+    max-width: 560px;
+  }
+}
+
+/* 1200px */
+@media (max-width: 1200px) {
+  .visualArea {
+    max-width: 480px;
+  }
+}
+
+/* 1024px */
+@media (max-width: 1024px) {
+  .visualArea {
+    max-width: 440px;
+    margin-bottom: 36px;
+  }
+}
+
+/* 768px — stack form vertically */
+@media (max-width: 768px) {
+  .visualArea {
+    max-width: 340px;
+    margin-bottom: 32px;
+  }
+
+  .form {
+    flex-direction: column;
+    gap: 12px;
+    max-width: 360px;
+  }
+
+  .emailInput {
+    width: 100%;
+  }
+
+  .submitBtn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* 435px */
+@media (max-width: 435px) {
+  .hero {
+    justify-content: flex-start;
+    padding-top: calc(var(--nav-height) + 32px);
+  }
+
+  .visualArea {
+    max-width: 260px;
+    margin-bottom: 28px;
+  }
+}
+
+/* 375px */
+@media (max-width: 375px) {
+  .visualArea {
+    max-width: 220px;
+  }
+
+  .headline {
+    letter-spacing: -0.025em;
+  }
+}
+
+/* 320px */
+@media (max-width: 320px) {
+  .visualArea {
+    max-width: 190px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .gridWrapper {
+    opacity: 1 !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   DEV SWITCHER — remove before production
+───────────────────────────────────────────────────────── */
+.devSwitcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--color-gray-200);
+  border-radius: 10px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.devLabel {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-gray-500);
+  margin-right: 2px;
+}
+
+.devBtn {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-gray-600);
+  background: transparent;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.devBtn:hover,
+.devBtnActive {
+  background: var(--color-black);
+  color: var(--color-white);
+  border-color: var(--color-black);
+}
