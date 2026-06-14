@@ -58,9 +58,10 @@
 
 /* ── Headline ── */
 .headline {
-  font-size: clamp(36px, 5.5vw, 72px);
+  /* font-size: clamp(36px, 5.5vw, 72px); */
+  font-size: 48px;
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.08;
   line-height: 1.06;
   color: var(--color-black);
   margin-bottom: 20px;
@@ -75,7 +76,8 @@
 
 /* ── Description ── */
 .description {
-  font-size: clamp(15px, 1.4vw, 17px);
+  /* font-size: clamp(15px, 1.4vw, 17px); */
+  font-size: 16px;
   font-weight: 400;
   color: var(--color-gray-600);
   max-width: 580px;
@@ -106,7 +108,9 @@
   padding: 13px 18px;
   width: 280px;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
   -webkit-appearance: none;
 }
 
@@ -131,7 +135,9 @@
   cursor: pointer;
   white-space: nowrap;
   letter-spacing: 0.01em;
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
   -webkit-appearance: none;
 }
 

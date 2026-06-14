@@ -1,6 +1,7 @@
 import React, { useRef, useState, useCallback } from 'react'
 import HeroGrid from './HeroGrid.jsx'
 import HeroVisual from './HeroVisual.jsx'
+import Nav from '../Nav/Nav.jsx'
 import useHeroAnimation from '../../hooks/useHeroAnimation.js'
 import styles from './Hero.module.css'
 
@@ -70,6 +71,7 @@ export default function Hero() {
       aria-label="Hero section"
       data-visual-mode={visualMode}
     >
+      <Nav />
 
       {/*
         ── GRID BACKGROUND ──────────────────────────────────
@@ -103,7 +105,7 @@ export default function Hero() {
 
         <h1 ref={headlineRef} className={styles.headline}>
           AI design&nbsp;tool
-          for&nbsp;<span className={styles.headlineAccent}>AEC</span>
+          for&nbsp;AEC
         </h1>
 
         <p ref={descriptionRef} className={styles.description}>

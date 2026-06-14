@@ -8,7 +8,7 @@ import Showcase from './components/Showcase/Showcase.jsx'
 export default function App() {
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
       <Hero />
       <Showcase />
       <Manifesto />
