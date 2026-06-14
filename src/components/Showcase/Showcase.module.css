@@ -1,0 +1,183 @@
+/* ─────────────────────────────────────────────────────────
+   Showcase.module.css
+   Breakpoints: 320 | 375 | 435 | 768 | 1024 | 1200 | 1440
+───────────────────────────────────────────────────────── */
+
+.section {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+}
+
+.pinWrap {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(48px, 6vw, 96px) var(--container-px, clamp(16px, 4vw, 64px));
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  aspect-ratio: 1512 / 1135;
+}
+
+.illustration {
+  position: absolute;
+  left: 22.5%;
+  top: 17%;
+  width: 55%;
+}
+
+.block {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.heading {
+  font-family: var(--font-sans);
+  font-size: clamp(22px, 2.4vw, 34px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #1a1a18;
+  margin: 0;
+}
+
+.body {
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 1.05vw, 15px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #6b6b67;
+  max-width: 280px;
+  margin: 0;
+}
+
+.draftMinutes {
+  left: 6.5%;
+  top: 9%;
+  width: 17%;
+}
+
+.aiSpeaks {
+  left: 80%;
+  top: 32%;
+  width: 18.5%;
+  text-align: left;
+}
+
+.smartEdits {
+  left: 6.5%;
+  top: 48%;
+  width: 17%;
+}
+
+.collaborative {
+  left: 80%;
+  top: 76%;
+  width: 18.5%;
+}
+
+/* ─────────────────────────────────────────────────────────
+   RESPONSIVE — below 1024px: stacked flow, no pin/absolute
+───────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .pinWrap {
+    min-height: auto;
+    display: block;
+    padding: clamp(56px, 10vw, 96px) var(--container-px, clamp(16px, 4vw, 64px));
+  }
+
+  .stage {
+    aspect-ratio: auto;
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(40px, 8vw, 64px);
+  }
+
+  .illustration,
+  .block {
+    position: static;
+    left: auto;
+    top: auto;
+    width: 100%;
+  }
+
+  .illustration {
+    order: 2;
+    max-width: 520px;
+  }
+
+  .draftMinutes    { order: 1; text-align: center; align-items: center; }
+  .aiSpeaks        { order: 3; text-align: center; align-items: center; }
+  .smartEdits      { order: 4; text-align: center; align-items: center; }
+  .collaborative   { order: 5; text-align: center; align-items: center; }
+
+  .body {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .heading {
+    font-size: clamp(24px, 5vw, 32px);
+  }
+}
+
+@media (max-width: 768px) {
+  .stage {
+    gap: clamp(32px, 8vw, 48px);
+  }
+
+  .heading {
+    font-size: clamp(22px, 6vw, 28px);
+  }
+
+  .body {
+    font-size: 14px;
+    max-width: 340px;
+  }
+}
+
+@media (max-width: 435px) {
+  .heading {
+    font-size: 22px;
+  }
+
+  .body {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 375px) {
+  .heading {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 320px) {
+  .heading {
+    font-size: 19px;
+  }
+
+  .body {
+    font-size: 12px;
+  }
+}
+
+/* ── Reduced motion: ensure final state visible ── */
+@media (prefers-reduced-motion: reduce) {
+  .block {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
