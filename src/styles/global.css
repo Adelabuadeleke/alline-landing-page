@@ -3,6 +3,68 @@
    Design tokens, reset, typography base
 ───────────────────────────────────────────────────────── */
 
+/* ==========================================================================
+   GEIST FONT FAMILY
+   ========================================================================== */
+
+/* Regular (Weight: 400) */
+@font-face {
+  font-family: "Geist";
+  src: url("./assets/fonts/geist/Geist-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Medium (Weight: 500) */
+@font-face {
+  font-family: "Geist";
+  src: url("./assets/fonts/geist/Geist-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bold (Weight: 700) */
+@font-face {
+  font-family: "Geist";
+  src: url("./assets/fonts/geist/Geist-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   WORK SANS FONT FAMILY
+   ========================================================================== */
+
+/* Regular (Weight: 400) */
+@font-face {
+  font-family: "Work Sans";
+  src: url("./assets/fonts/worksans/WorkSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Medium (Weight: 500) */
+@font-face {
+  font-family: "Work Sans";
+  src: url("./assets/fonts/worksans/WorkSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bold (Weight: 700) */
+@font-face {
+  font-family: "Work Sans";
+  src: url("./assets/fonts/worksans/WorkSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Colors */
   --color-black: #1a1a18;
@@ -15,12 +77,16 @@
   --color-gray-500: #888883;
   --color-gray-600: #686863;
   --color-amber: #ffb758;
-  --color-amber-dark: #cc8a18;
+  --color-amber-dark: #e89f33;
   --color-amber-light: #fdf0d8;
 
   /* Typography */
   --font-sans:
     "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-work-sans:
+    "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-geist:
+    "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   /* Spacing */
   --nav-height: 72px;

@@ -80,9 +80,7 @@ export default function Hero() {
         The grid wrapper uses position:absolute inset:0 so it
         covers every pixel regardless of hero height.
       */}
-      <div ref={gridRef} className={styles.gridWrapper} style={{ opacity: 0 }}>
-        <HeroGrid />
-      </div>
+     
 
       {/*
         ── HERO VISUAL ───────────────────────────────────────
@@ -93,6 +91,10 @@ export default function Hero() {
         <HeroVisual mode="3d" />        → Future: Three.js/R3F
       */}
       <div className={styles.visualArea}>
+        <div ref={gridRef} className={styles.gridWrapper} style={{ opacity: 0 }}>
+          <HeroGrid />
+        </div>
+        
         <HeroVisual mode={visualMode} svgRef={svgRef} />
       </div>
 
@@ -109,9 +111,9 @@ export default function Hero() {
         </h1>
 
         <p ref={descriptionRef} className={styles.description}>
-          A professional 2D &amp; 3D design platform built for architects,
-          interior designers, and building professionals — with AI working
-          alongside you, not instead of you.
+           A professional 2D & 3D design platform built for architects, 
+           interior designers, and building professionals - with AI working 
+           alongside you, not instead of you.
         </p>
 
         <form
@@ -159,7 +161,7 @@ export default function Hero() {
         Remove this block before production.
         Lets you preview all 3 hero states during development.
       */}
-      {import.meta.env.DEV && (
+      {/* {import.meta.env.DEV && (
         <div className={styles.devSwitcher} aria-label="Dev: switch hero state">
           <span className={styles.devLabel}>State</span>
           {['svg', 'wireframe', 'rendered'].map((mode) => (
@@ -174,7 +176,7 @@ export default function Hero() {
             </button>
           ))}
         </div>
-      )}
+      )} */}
 
     </section>
   )
