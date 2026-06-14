@@ -13,8 +13,8 @@ export default function App() {
       {/* <Nav /> */}
       <Hero />
       <GridSection />
-      <Showcase />
       <Manifesto />
+      <Showcase />
       <PriorityAccess />
     </>
   )
