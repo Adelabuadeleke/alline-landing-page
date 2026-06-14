@@ -1,0 +1,36 @@
+/* ─────────────────────────────────────────────────────────
+   DecorativeGrid.module.css
+───────────────────────────────────────────────────────── */
+
+.planSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+  color: #595959;
+}
+
+/* ── Each of the 32 architectural bracket shapes ── */
+.line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+  transition: stroke 0.35s ease;
+}
+
+/* ── Invisible hover-zone covering one grid cell ── */
+.hoverZone {
+  fill: transparent;
+  pointer-events: all;
+}
+
+.section:hover .line {
+  stroke: var(--color-amber, #e8a020);
+}
+
+/* ── Reduced motion: no transition delay on color change ── */
+@media (prefers-reduced-motion: reduce) {
+  .line {
+    transition: none;
+  }
+}
