@@ -78,14 +78,16 @@
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 500;
-  color: var(--color-white);
+  color: var(--color-black);
   background: var(--color-amber);
   border: none;
   border-radius: 8px;
   padding: 10px 20px;
   cursor: pointer;
   letter-spacing: 0.01em;
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
   white-space: nowrap;
 }
 
@@ -124,13 +126,22 @@
   height: 1.5px;
   background: var(--color-black);
   border-radius: 2px;
-  transition: transform 0.3s var(--ease-out), opacity 0.2s;
+  transition:
+    transform 0.3s var(--ease-out),
+    opacity 0.2s;
   transform-origin: center;
 }
 
-.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.hamburger.open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
 
 /* ── Mobile dropdown menu ── */
 .mobileMenu {
