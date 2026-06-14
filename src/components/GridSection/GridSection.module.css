@@ -1,0 +1,18 @@
+.section {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  padding: clamp(24px, 4vw, 56px) 0;
+}
+
+.inner {
+  width: 100%;
+  max-width: 1512px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: clamp(16px, 4vw, 32px) 0;
+  }
+}
