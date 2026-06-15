@@ -69,6 +69,7 @@
 :root {
   /* Colors */
   --color-black: #1a1a18;
+  --color-black-5: #0000000d;
   --color-white: #ffffff;
   --color-gray-50: #f7f7f5;
   --color-gray-100: #f0f0ed;
@@ -123,6 +124,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   line-height: 1.6;
+}
+
+a {
+  outline: none;
+}
+
+a:focus {
+  display: none;
 }
 
 /* Focus visible for keyboard nav */
