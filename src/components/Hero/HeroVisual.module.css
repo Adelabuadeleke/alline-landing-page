@@ -1,7 +1,6 @@
 /* ─────────────────────────────────────────────────────────
    HeroVisual.module.css
 ───────────────────────────────────────────────────────── */
-
 /* ── State 1: SVG outline logo ── */
 .svgLogo {
   width: 100%;
@@ -9,6 +8,28 @@
   display: block;
   margin: 0 auto;
   /* opacity driven by GSAP */
+}
+
+@media screen and (min-width: 1200px) {
+  /* ── State 1: SVG outline logo ── */
+  .svgLogo {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto;
+    z-index: 1;
+    /* opacity driven by GSAP */
+  }
+}
+@media screen and (min-width: 1440px) {
+  /* ── State 1: SVG outline logo ── */
+  .svgLogo {
+    width: 100%;
+    max-width: 420px;
+    display: block;
+    margin: 0 auto;
+    /* opacity driven by GSAP */
+  }
 }
 
 .logoPathOuter,
@@ -84,17 +105,27 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .svgLogo       { max-width: 300px; }
+  .svgLogo {
+    max-width: 300px;
+  }
   .wireframeContainer,
-  .renderedContainer { max-width: 340px; }
+  .renderedContainer {
+    max-width: 340px;
+  }
 }
 
 @media (max-width: 435px) {
-  .svgLogo       { max-width: 240px; }
+  .svgLogo {
+    max-width: 240px;
+  }
   .wireframeContainer,
-  .renderedContainer { max-width: 280px; }
+  .renderedContainer {
+    max-width: 280px;
+  }
 }
 
 @media (max-width: 375px) {
-  .svgLogo       { max-width: 200px; }
+  .svgLogo {
+    max-width: 200px;
+  }
 }

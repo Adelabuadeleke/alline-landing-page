@@ -79,8 +79,8 @@ export default function HeroGrid({ opacity = 1 }) {
               <path
                 d="M 40 0 L 0 0 0 40"
                 fill="none"
-                stroke="#c8c8c0"
-                strokeWidth="0.4"
+                stroke="#e2e2e2"
+                strokeWidth="1.53"
               />
             </pattern>
 
@@ -95,8 +95,9 @@ export default function HeroGrid({ opacity = 1 }) {
               <path
                 d="M 200 0 L 0 0 0 200"
                 fill="none"
-                stroke="#b0b0a8"
-                strokeWidth="0.8"
+                // stroke="#b0b0a8"
+                stroke="#e2e2e2"
+                strokeWidth="1.53"
               />
             </pattern>
           </defs>
