@@ -1,0 +1,98 @@
+/* ─────────────────────────────────────────────────────────
+   Platform.module.css
+   Breakpoints: 320 | 375 | 435 | 768 | 1024 | 1200 | 1440
+───────────────────────────────────────────────────────── */
+
+.section {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  padding: clamp(56px, 9vw, 120px) var(--container-px, clamp(16px, 4vw, 64px));
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  font-family: var(--font-sans);
+  font-size: clamp(28px, 3.6vw, 46px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  text-align: center;
+  color: #1a1a18;
+  margin: 0 0 clamp(32px, 5vw, 56px);
+}
+
+/*
+ * Grid — matches the reference's asymmetric layout:
+ *   Column 1: 2D Design (shorter) stacked above Sketch to CAD (taller)
+ *   Column 2: 3D Design (taller)  stacked above AI Co-Driver (shorter)
+ *
+ * Each column is its own flex container so the two cards in
+ * it can take independent heights via `flex-grow` ratios,
+ * rather than being locked to a shared row height. This is
+ * what actually allows different per-card heights — a plain
+ * 2-row CSS grid (grid-template-rows) forces every card in
+ * the same row to match that row's height, which is the
+ * "no" case before this change.
+ */
+.grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  /* grid-template-columns: 1fr 1fr; */
+  grid-template-columns: 434px 434px;
+  gap: clamp(12px, 1.4vw, 20px);
+  /* Pin total grid height so flex-grow ratios inside each column
+     have something concrete to divide up. */
+  height: clamp(530px, 46vw, 660px);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.4vw, 20px);
+  height: 100%;
+}
+
+/* flex-grow ratio controls each card's share of its column's height */
+.column > * {
+  flex-grow: 1;
+  min-height: 0; /* allow shrinking below content size if needed */
+}
+
+/* ─────────────────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .grid {
+    height: clamp(480px, 56vw, 600px);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 16px;
+  }
+
+  .column {
+    height: auto;
+  }
+
+  .column > * {
+    flex-grow: 0; /* stop flex-growing once stacked single-column */
+  }
+
+  .heading {
+    font-size: clamp(26px, 6vw, 32px);
+  }
+}
+
+@media (max-width: 435px) {
+  .section {
+    padding: clamp(40px, 9vw, 64px) var(--container-px, 16px);
+  }
+}

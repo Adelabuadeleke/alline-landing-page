@@ -1,0 +1,189 @@
+/* ─────────────────────────────────────────────────────────
+   PlatformCard.module.css
+   Breakpoints: 320 | 375 | 435 | 768 | 1024 | 1200 | 1440
+───────────────────────────────────────────────────────── */
+
+/* .card {
+  position: relative;
+  overflow: visible; 
+  border-radius: 4px;
+  padding: clamp(20px, 2.4vw, 32px);
+  min-height: clamp(260px, 24vw, 340px);
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  opacity: 0;
+} */
+
+.card {
+  position: relative;
+  overflow: visible; /* corner marks sit slightly outside the box */
+  border-radius: 4px;
+  padding: clamp(20px, 2.4vw, 32px);
+  min-height: 160px; /* small floor only — actual height comes from flex-grow in .column */
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+
+  /* opacity + y handled by GSAP for the scroll-in reveal */
+  opacity: 0;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.28);
+}
+
+.orange {
+  background: #ed6905;
+  color: #ffffff;
+}
+.blue {
+  background: #0081f3;
+  color: #ffffff;
+}
+.green {
+  background: #2ebe24;
+  color: #ffffff;
+}
+.yellow {
+  background: #fbdb46;
+  color: #1a1a18;
+}
+
+.textBlock {
+  position: relative;
+  z-index: 2;
+  max-width: 70%;
+}
+
+.heading {
+  font-family: var(--font-geist);
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0 0 8px;
+  letter-spacing: -0.07em;
+}
+
+.description {
+  font-family: var(--font-work-sans);
+  font-size: clamp(12.5px, 1vw, 14px);
+  font-weight: 400;
+  line-height: 1.1;
+  opacity: 0.92;
+  margin: 0;
+  max-width: 280px;
+  letter-spacing: -0.07em;
+}
+
+.illustrationSlot {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.illustrationSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.illustrationSvg [data-draw] {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  transition:
+    stroke-width 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.illustrationSvg [data-handle] {
+  fill: currentColor;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .illustrationSvg [data-draw] {
+  stroke-width: 2.1;
+}
+
+.card:hover .illustrationSvg [data-handle] {
+  opacity: 1;
+}
+
+.card.orange .illustrationSlot.br {
+  right: clamp(16px, 3vw, 32px);
+  bottom: clamp(16px, 3vw, 32px);
+  width: 46%;
+  aspect-ratio: 223 / 289;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.card.blue .illustrationSlot.br {
+  right: 0;
+  bottom: 0;
+  width: 78%;
+  aspect-ratio: 386 / 275;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.card.green .illustrationSlot.br {
+  right: clamp(8px, 2vw, 20px);
+  bottom: clamp(4px, 1vw, 12px);
+  width: 60%;
+  aspect-ratio: 340 / 220;
+  color: rgba(20, 60, 15, 0.9);
+}
+
+.card.yellow .illustrationSlot.br {
+  right: clamp(8px, 2vw, 24px);
+  bottom: clamp(20px, 3vw, 36px);
+  width: 50%;
+  aspect-ratio: 245 / 130;
+  color: rgba(60, 48, 0, 0.85);
+}
+
+@media (max-width: 768px) {
+  .card {
+    min-height: 240px;
+    padding: 22px;
+  }
+  .textBlock {
+    max-width: 80%;
+  }
+  .heading {
+    font-size: 22px;
+  }
+  .description {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 435px) {
+  .card {
+    min-height: 220px;
+    padding: 18px;
+  }
+  .heading {
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none;
+  }
+  .card:hover {
+    transform: none;
+  }
+}

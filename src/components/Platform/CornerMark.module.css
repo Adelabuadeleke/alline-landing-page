@@ -1,0 +1,63 @@
+/* ─────────────────────────────────────────────────────────
+   CornerMark.module.css
+───────────────────────────────────────────────────────── */
+
+.mark {
+  position: absolute;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0; /* GSAP fades these in with the card */
+}
+
+.top-left {
+  top: -17px;
+  left: -17px;
+}
+.top-right {
+  top: -17px;
+  right: -17px;
+}
+.bottom-left {
+  bottom: -17px;
+  left: -17px;
+}
+.bottom-right {
+  bottom: -17px;
+  right: -17px;
+}
+
+.dash {
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  opacity: 0.55;
+}
+
+.cross {
+  stroke: currentColor;
+  stroke-width: 1.2;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .mark {
+    width: 22px;
+    height: 22px;
+  }
+  .top-left {
+    top: -11px;
+    left: -11px;
+  }
+  .top-right {
+    top: -11px;
+    right: -11px;
+  }
+  .bottom-left {
+    bottom: -11px;
+    left: -11px;
+  }
+  .bottom-right {
+    bottom: -11px;
+    right: -11px;
+  }
+}
