@@ -21,7 +21,7 @@
 .card {
   position: relative;
   overflow: visible; /* corner marks sit slightly outside the box */
-  border-radius: 4px;
+  /* border-radius: 4px; */
   padding: clamp(20px, 2.4vw, 32px);
   min-height: 160px; /* small floor only — actual height comes from flex-grow in .column */
   display: flex;
