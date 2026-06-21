@@ -51,18 +51,18 @@ export default function Manifesto() {
         )
       })
 
-      if (buildingRef.current) {
-        gsap.to(buildingRef.current, {
-          y: -60,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1.2,
-          },
-        })
-      }
+      // if (buildingRef.current) {
+      //   gsap.to(buildingRef.current, {
+      //     y: -60,
+      //     ease: 'none',
+      //     scrollTrigger: {
+      //       trigger: sectionRef.current,
+      //       start: 'top bottom',
+      //       end: 'bottom top',
+      //       scrub: 1.2,
+      //     },
+      //   })
+      // }
 
     }, sectionRef)
 
