@@ -4,47 +4,48 @@ import styles from './CornerMark.module.css'
 /*
  * CornerMark
  * ─────────────────────────────────────────────────────────
- * The small dashed-line + crosshair decoration sitting at
- * each card's corners in the reference design (a "print
- * registration mark" motif, reinforcing the technical/CAD
- * theme of the section).
+ * Print-registration-style corner mark (matches the provided
+ * Group_6.svg exactly): a long dashed horizontal line and a
+ * long dashed vertical line crossing near the corner, plus a
+ * short diagonal tick at the intersection.
  *
- * position: which corner — used to flip the dash directions
- * so the lines always point outward/away from the card.
+ * The source SVG is drawn for a TOP-LEFT corner (lines run
+ * from the corner outward to the right/down, tick points
+ * up-right). For the other 3 corners we rotate the whole
+ * mark 90/180/270° with a CSS transform — same geometry,
+ * just spun to face the right direction — rather than
+ * hand-authoring 4 separate path sets.
+ *
+ * Props:
+ *   position — 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+ *   color    — any valid CSS color. Defaults to currentColor,
+ *              so it can also be set via the parent's `color`
+ *              CSS property if you don't pass this prop.
  */
-export default function CornerMark({ position = 'top-left' }) {
-  const isTop = position.startsWith('top')
-  const isLeft = position.endsWith('left')
-
+export default function CornerMark({ position = 'top-left', color }) {
   return (
     <svg
       className={`${styles.mark} ${styles[position]}`}
       data-corner-mark
-      width="34"
-      height="34"
-      viewBox="0 0 34 34"
+      width="143"
+      height="143"
+      viewBox="0 0 143 143"
       fill="none"
+      style={color ? { color } : undefined}
       aria-hidden="true"
     >
-      {/* Horizontal dashed line */}
-      <line
-        x1={isLeft ? 0 : 34}
-        y1="17"
-        x2={isLeft ? 28 : 6}
-        y2="17"
+      {/* Horizontal dashed line (3 segments, matching source gaps) */}
+      <path
+        d="M143 15.75H83M0 15.75H35.75H59M62.5625 15.75H71.5H80.4375"
         className={styles.dash}
       />
-      {/* Vertical dashed line */}
-      <line
-        x1="17"
-        y1={isTop ? 0 : 34}
-        x2="17"
-        y2={isTop ? 28 : 6}
+      {/* Vertical dashed line (3 segments, matching source gaps) */}
+      <path
+        d="M15.25 143V83.5M15.25 0V35.75V57.5M15.25 59.5V80.4375"
         className={styles.dash}
       />
-      {/* Crosshair plus mark */}
-      <line x1="11" y1="17" x2="23" y2="17" className={styles.cross} />
-      <line x1="17" y1="11" x2="17" y2="23" className={styles.cross} />
+      {/* Diagonal tick at the crossing point */}
+      <path d="M11 20.5L19.5 12" className={styles.tick} />
     </svg>
   )
 }

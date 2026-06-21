@@ -57,21 +57,26 @@ export default function Platform() {
           <PlatformCard
             ref={cardRefs[0]}
             tone="orange"
-            heading="2D Design"
+            heading={`2D Design`}
             description="Draft, Design, and annotate floor plans & layouts in a clean, professional 2D workspace built around how designers actually work."
             Illustration={Illustration2D}
             illustrationPos="br"
             grow={3}
+            cornerVariant="tl-br"
+            cornerColor="#F66B01"
           />
 
           <PlatformCard
             ref={cardRefs[2]}
             tone="green"
-            heading="Sketch to CAD"
+            heading={`Sketch to <br/> CAD`}
             description="Convert your sketch to editable drawings."
             Illustration={IllustrationSketch}
             illustrationPos="br"
             grow={4}
+            // cornerVariant="tr-bl"
+            cornerVariant="tr-bl"
+            cornerColor="#EEB0FF"
           />
         </div>
 
@@ -79,21 +84,25 @@ export default function Platform() {
           <PlatformCard
             ref={cardRefs[1]}
             tone="blue"
-            heading="3D Design"
+            heading={`3D Design`}
             description="Move from plans to fully realized 3D models without switching tools. Visualize spaces, structures, and elevations — all in one environment."
             Illustration={Illustration3D}
-            illustrationPos="br"
-            grow={12}
+            // illustrationPos="br"
+            grow={11}
+            cornerVariant="tr-bl"
+            cornerColor="#0180F6"
           />
 
           <PlatformCard
             ref={cardRefs[3]}
             tone="yellow"
-            heading="AI as Your Co-Driver"
+            heading={`AI as Your <br/> Co-Driver`}
             description="Your AI assistant anticipates, suggests, and speeds up the tedious parts while you stay in full creative control."
             Illustration={IllustrationAI}
             illustrationPos="br"
-            grow={0}
+            grow={1.5}
+            cornerVariant="tl-br"
+            cornerColor="#FFDE4C"
           />
         </div>
       </div>

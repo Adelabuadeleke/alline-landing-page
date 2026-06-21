@@ -30,9 +30,23 @@ import styles from './PlatformCard.module.css'
  * for the per-card illustration stroke-draw sequence.
  */
 const PlatformCard = forwardRef(function PlatformCard(
-  { tone, heading, description, Illustration, illustrationPos = 'br', illustrationClassName, grow = 1 },
+  {
+    tone, 
+    heading, 
+    description, 
+    Illustration, 
+    illustrationPos = 'br', 
+    illustrationClassName, 
+    grow = 1,
+    cornerVariant = 'tl-br',
+    cornerColor,
+  },
   ref
 ) {
+   const [cornerA, cornerB] =
+    cornerVariant === 'tr-bl'
+      ? ['top-right', 'bottom-left']
+      : ['top-left', 'bottom-right']
   return (
     <div
       ref={ref}
@@ -40,13 +54,15 @@ const PlatformCard = forwardRef(function PlatformCard(
       style={{ flexGrow: grow }}
       data-platform-card
     >
-      <CornerMark position="top-left" />
+      <CornerMark position={cornerA} color={cornerColor} />
+      <CornerMark position={cornerB} color={cornerColor} />
+      {/* <CornerMark position="top-left" />
       <CornerMark position="top-right" />
       <CornerMark position="bottom-left" />
-      <CornerMark position="bottom-right" />
+      <CornerMark position="bottom-right" /> */}
 
       <div className={styles.textBlock}>
-        <h3 className={styles.heading}>{heading}</h3>
+        <h3 className={styles.heading} dangerouslySetInnerHTML={{__html: heading}}></h3>
         <p className={styles.description}>{description}</p>
       </div>
 
