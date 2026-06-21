@@ -1,10 +1,9 @@
 import React, { useRef } from 'react'
 import PlatformCard from './PlatformCard.jsx'
 import Illustration2D from './illustrations/Illustration2D.jsx'
-// import Illustration3D from './illustrations/Illustration3D.jsx'
 import Illustration3D from './illustrations/illustration3D.jsx'
-import IllustrationSketch from './illustrations/IllustrationSketch.jsx'
-import IllustrationAI from './illustrations/IllustrationAI.jsx'
+import IllustrationSketch from './illustrations/illustrationSketch.jsx'
+import IllustrationAI from './illustrations/illustrationAi.jsx'
 import usePlatformAnimation from '../../hooks/usePlatformAnimation.js'
 import styles from './Platform.module.css'
 
