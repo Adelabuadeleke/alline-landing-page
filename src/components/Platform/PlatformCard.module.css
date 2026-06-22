@@ -3,41 +3,22 @@
    Breakpoints: 320 | 375 | 435 | 768 | 1024 | 1200 | 1440
 ───────────────────────────────────────────────────────── */
 
-/* .card {
-  position: relative;
-  overflow: visible; 
-  border-radius: 4px;
-  padding: clamp(20px, 2.4vw, 32px);
-  min-height: clamp(260px, 24vw, 340px);
-  display: flex;
-  flex-direction: column;
-  transition:
-    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
-  opacity: 0;
-} */
-
 .card {
   position: relative;
-  overflow: visible; /* corner marks sit slightly outside the box */
-  /* border-radius: 4px; */
+  overflow: visible;
   padding: clamp(20px, 2.4vw, 32px);
-  min-height: 160px; /* small floor only — actual height comes from flex-grow in .column */
+  min-height: 160px;
   display: flex;
   flex-direction: column;
   transition:
     transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
-
-  /* opacity + y handled by GSAP for the scroll-in reveal */
   opacity: 0;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  /* box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.28); */
 }
 
 .orange {

@@ -77,3 +77,67 @@ const PlatformCard = forwardRef(function PlatformCard(
 })
 
 export default PlatformCard
+
+// import React, { forwardRef } from 'react'
+// import CornerMark from './CornerMark.jsx'
+// import styles from './PlatformCard.module.css'
+
+/*
+ * PlatformCard
+ * ─────────────────────────────────────────────────────────
+ * Corner marks live OUTSIDE .clip (overflow:hidden) so they
+ * can peek past the card edge, while text + illustration live
+ * INSIDE .clip so the illustration can never overflow the
+ * card on small viewports.
+ *
+ * No hover stroke-thickening — illustrations are purely
+ * scroll/loop-driven (see usePlatformAnimation.js). Hover only
+ * does the card lift.
+ */
+// const PlatformCard = forwardRef(function PlatformCard(
+//   {
+//     tone,
+//     heading,
+//     description,
+//     Illustration,
+//     illustrationPos = 'br',
+//     illustrationClassName,
+//     grow = 1,
+//     cornerVariant = 'tl-br',
+//     cornerColor,
+//   },
+//   ref
+// ) {
+//   const [cornerA, cornerB] =
+//     cornerVariant === 'tr-bl'
+//       ? ['top-right', 'bottom-left']
+//       : ['top-left', 'bottom-right']
+
+//   return (
+//     <div
+//       ref={ref}
+//       className={`${styles.card} ${styles[tone]}`}
+//       style={{ flexGrow: grow }}
+//       data-platform-card
+//     >
+//       <CornerMark position={cornerA} color={cornerColor} />
+//       <CornerMark position={cornerB} color={cornerColor} />
+
+//       <div className={styles.clip}>
+//         <div className={styles.textBlock}>
+//           <h3 className={styles.heading}>{heading}</h3>
+//           <p className={styles.description}>{description}</p>
+//         </div>
+
+//         <div className={`${styles.illustrationSlot} ${styles[illustrationPos]}`}>
+//           <Illustration
+//             className={`${styles.illustrationSvg} ${illustrationClassName || ''}`}
+//             data-illustration
+//           />
+//         </div>
+//       </div>
+//     </div>
+//   )
+// })
+
+// export default PlatformCard
