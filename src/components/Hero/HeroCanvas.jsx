@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from 'react'
+import React, { useRef, useState, useCallback, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { AdaptiveDpr } from '@react-three/drei'
 import AllineLogo3D from './AllineLogo3D.jsx'
@@ -61,6 +61,26 @@ export default function HeroCanvas({ startOrbit = false }) {
     if (revealBorderRef.current)
       revealBorderRef.current.style.opacity = '0'
   }, [])
+
+  useEffect(() => {
+  if (!canvasWrapRef.current) return
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry.isIntersecting) {
+        if (revealBorderRef.current)
+          revealBorderRef.current.style.opacity = '0'
+        if (overlayRef.current)
+          overlayRef.current.style.clipPath = 'inset(50% 50% 50% 50%)'
+        setIsHovered(false)
+      }
+    },
+    { threshold: 0 }
+  )
+
+  observer.observe(canvasWrapRef.current)
+  return () => observer.disconnect()
+}, [])
 
   return (
     <div className={styles.hero}>
