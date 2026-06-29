@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useMemo } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import BuildingIllustration from './BuildingIllustration.jsx'
@@ -6,63 +6,163 @@ import styles from './Manifesto.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
+/*
+ * createDelayTracker
+ * ─────────────────────────────────────────────────────────
+ * Returns a getDelay(index, lineCycle) function.
+ *
+ * When multiple lines enter the viewport "simultaneously"
+ * (within WINDOW ms of each other), they form a batch.
+ * Each line in the batch gets a delay equal to its position
+ * within the batch × lineCycle — so they play sequentially
+ * in DOM order even though their ScrollTriggers all fired
+ * at the same time.
+ *
+ * Lines that enter the viewport on later scroll events
+ * (genuinely later in time) get delay 0 — they fire
+ * immediately since no earlier lines are competing.
+ */
+function createDelayTracker() {
+  const fired  = new Map()
+  const WINDOW = 120  // ms — tune up if lines still overlap
+
+  return function getDelay(index, lineCycle) {
+    const now = Date.now()
+
+    // Count how many lower-index lines fired within the batch window
+    let position = 0
+    for (const [i, t] of fired.entries()) {
+      if (i < index && now - t < WINDOW) {
+        position++
+      }
+    }
+
+    // Register this line's fire time
+    fired.set(index, now)
+
+    return position * lineCycle
+  }
+}
+
+/*
+ * ManifestoLine
+ * ─────────────────────────────────────────────────────────
+ * Each line has its own ScrollTrigger (fires when THIS line
+ * enters the viewport). The delay from getDelay() ensures
+ * that if multiple lines enter view simultaneously, they
+ * still animate one-after-another in DOM order.
+ */
+function ManifestoLine({ children, className, index, getDelay }) {
+  const wrapRef = useRef(null)
+  const barRef  = useRef(null)
+  const textRef = useRef(null)
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (prefersReduced) {
+      gsap.set(textRef.current, { opacity: 1 })
+      gsap.set(barRef.current,  { scaleX: 0 })
+      return
+    }
+
+    const LINE_CYCLE = 0.76  // bar-in + bar-out duration
+
+    gsap.set(textRef.current, { opacity: 0 })
+    gsap.set(barRef.current,  { scaleX: 0, transformOrigin: 'left center' })
+
+    const st = ScrollTrigger.create({
+      trigger: wrapRef.current,
+      start: 'top 88%',
+      once: true,
+      onEnter: () => {
+        const delay = getDelay(index, LINE_CYCLE)
+
+        const tl = gsap.timeline({ delay })
+
+        tl
+          .to(barRef.current, {
+            scaleX: 1,
+            duration: 0.38,
+            ease: 'power2.inOut',
+            transformOrigin: 'left center',
+          })
+          .set(barRef.current, { transformOrigin: 'right center' })
+          .to(barRef.current, {
+            scaleX: 0,
+            duration: 0.38,
+            ease: 'power2.inOut',
+          })
+          .to(textRef.current, {
+            opacity: 1,
+            duration: 0.28,
+            ease: 'power1.out',
+          }, '-=0.22')
+      },
+    })
+
+    return () => st.kill()
+  }, [])  // eslint-disable-line react-hooks/exhaustive-deps
+
+  return (
+    <span
+      ref={wrapRef}
+      className={`${styles.line} ${className || ''}`}
+      data-manifesto-line
+    >
+      <span ref={barRef} className={styles.lineBar} aria-hidden="true" />
+      <span ref={textRef} className={styles.lineText}>
+        {children}
+      </span>
+    </span>
+  )
+}
+
 export default function Manifesto() {
-  const sectionRef   = useRef(null)
-  const para1Ref     = useRef(null)
-  const para2Ref     = useRef(null)
-  const para3Ref     = useRef(null)
-  const logoRef      = useRef(null)
-  const buildingRef  = useRef(null)
+  const sectionRef  = useRef(null)
+  const buildingRef = useRef(null)
+  const logoRef     = useRef(null)
+
+  /*
+   * One shared delay tracker for all lines in this section.
+   * useMemo ensures it's created once and shared across
+   * all ManifestoLine instances via the getDelay prop.
+   */
+  const getDelay = useMemo(() => createDelayTracker(), [])
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const ctx = gsap.context(() => {
 
-      if (prefersReduced) {
-        gsap.set(
-          [para1Ref.current, para2Ref.current, para3Ref.current, logoRef.current],
-          { opacity: 1, y: 0 }
-        )
-        return
+      if (!prefersReduced && buildingRef.current) {
+        gsap.to(buildingRef.current, {
+          y: -60,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.2,
+          },
+        })
       }
 
-      const textEls = [
-        para1Ref.current,
-        para2Ref.current,
-        para3Ref.current,
-        logoRef.current,
-      ].filter(Boolean)
-
-      textEls.forEach((el) => {
+      if (logoRef.current) {
         gsap.fromTo(
-          el,
-          { opacity: 0, y: 32 },
+          logoRef.current,
+          { opacity: 0 },
           {
             opacity: 1,
-            y: 0,
-            duration: 0.85,
-            ease: 'power3.out',
+            duration: 0.7,
+            ease: 'power2.out',
             scrollTrigger: {
-              trigger: el,
-              start: 'top 88%',
+              trigger: logoRef.current,
+              start: 'top 90%',
               toggleActions: 'play none none none',
             },
           }
         )
-      })
-
-      // if (buildingRef.current) {
-      //   gsap.to(buildingRef.current, {
-      //     y: -60,
-      //     ease: 'none',
-      //     scrollTrigger: {
-      //       trigger: sectionRef.current,
-      //       start: 'top bottom',
-      //       end: 'bottom top',
-      //       scrub: 1.2,
-      //     },
-      //   })
-      // }
+      }
 
     }, sectionRef)
 
@@ -78,24 +178,33 @@ export default function Manifesto() {
     >
       <div className={styles.content}>
 
-        <p ref={para1Ref} className={styles.para}>
-          FOR DECADES,{' '}
-          <span className={styles.accent}>BUILDING PROFESSIONALS</span>{' '}
-          HAVE PAID A FORTUNE TO USE SOFTWARE THAT WAS DESIGNED BEFORE
-          AI &amp; THE INTERNET WAS MAINSTREAM.
+        <p className={styles.para}>
+          <ManifestoLine index={0} getDelay={getDelay}>FOR DECADES, <span className={styles.accent}>BUILDING</span></ManifestoLine>
+          <ManifestoLine index={1} getDelay={getDelay}>
+            <span className={styles.accent}>PROFESSIONALS</span> HAVE PAID A
+          </ManifestoLine>
+          <ManifestoLine index={2} getDelay={getDelay}> FORTUNE TO USE SOFTWARE</ManifestoLine>
+          <ManifestoLine index={3} getDelay={getDelay}>THAT WAS DESIGNED BEFORE</ManifestoLine>
+          <ManifestoLine index={4} getDelay={getDelay}>AI &amp; THE INTERNET WAS</ManifestoLine>
+          <ManifestoLine index={5} getDelay={getDelay}>MAINSTREAM.</ManifestoLine>
         </p>
 
-        <p ref={para2Ref} className={styles.para}>
-          SOFTWARE THAT&apos;S COMPLEX BY ACCIDENT,
-          NOT BY NECESSITY.
+        <p className={styles.para}>
+          <ManifestoLine index={6} getDelay={getDelay}>SOFTWARE THAT&apos;S COMPLEX </ManifestoLine>
+          <ManifestoLine index={7} getDelay={getDelay}>BY ACCIDENT, NOT BY</ManifestoLine>
+          <ManifestoLine index={8} getDelay={getDelay}>NECESSITY.</ManifestoLine>
         </p>
 
-        <p ref={para3Ref} className={styles.para}>
-          WE ASKED A{' '}
-          <span className={styles.accent}>SIMPLE QUESTION:</span>
-          <br />
-          WHAT WOULD A DESIGN TOOL LOOK LIKE IF IT WAS BUILT
-          TODAY, FOR THE PEOPLE ACTUALLY USING IT?
+        <p className={styles.para}>
+          <ManifestoLine index={9} getDelay={getDelay}>
+            WE ASKED A <span className={styles.accent}>SIMPLE</span>
+          </ManifestoLine>
+          <ManifestoLine index={10} getDelay={getDelay}><span className={styles.accent}>QUESTION:</span></ManifestoLine>
+
+          <ManifestoLine index={11} getDelay={getDelay}>WHAT WOULD A DESIGN TOOL </ManifestoLine>
+          <ManifestoLine index={12} getDelay={getDelay}>LOOK LIKE IF IT WAS BUILT </ManifestoLine>
+          <ManifestoLine index={13} getDelay={getDelay}>TODAY, FOR THE PEOPLE</ManifestoLine>
+          <ManifestoLine index={14} getDelay={getDelay}>ACTUALLY USING IT?</ManifestoLine>
         </p>
 
         <div ref={logoRef} className={styles.logoMark} aria-hidden="true">
