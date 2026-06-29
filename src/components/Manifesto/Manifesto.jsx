@@ -24,7 +24,7 @@ gsap.registerPlugin(ScrollTrigger)
  */
 function createDelayTracker() {
   const fired  = new Map()
-  const WINDOW = 120  // ms — tune up if lines still overlap
+  const WINDOW = 300  // ms — tune up if lines still overlap
 
   return function getDelay(index, lineCycle) {
     const now = Date.now()
